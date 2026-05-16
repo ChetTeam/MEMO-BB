@@ -16,6 +16,11 @@
 2. Скачайте актуальный установщик `GTA5RP MEMO LAWS Setup.exe`.
 3. Установите приложение (ярлык будет создан автоматически).
 4. Запустите клиент и вызывайте окно в игре через `Alt + E`.
+*Перед установкой обязательно ознакомьтесь с [Условиями использования](TERMS.md).*
 
-ChetTeam © 2026 | Blackberry (GTA5RP)
-Community: [404 : Server Not Found](https://discord.com/invite/cheterin)
+📞 Обратная связь и Поддержка
+* **Разработчик (Code & UI):** Discord: `nanda070`
+* **Менеджмент & Дистрибуция:** Discord: `cheterin`
+* **Сообщество:** [404 : Server Not Found](https://discord.gg/cheterin)
+
+*ChetTeam © 2026 | Blackberry (GTA5RP)*
