@@ -3,7 +3,7 @@
 ![Platform](https://img.shields.io/badge/platform-Windows-lightgrey.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 
-Автономная памятка для быстрого доступа к ЗБ и Правилам Сервера [Blackberry](https://forum.gta5rp.com/forums/server-no4-blackberry.223/) Проекта [GTA5RP](https://gta5rp.com/). Продукт спроектирован для Сотрудников Гос. Структур: минимизирует alt-tab, ускоряет процесс ориентировки по форуму и обеспечивает актуальную информацию.
+Автономная памятка для быстрого доступа к [ЗБ](https://forum.gta5rp.com/forums/zakonodatelnaja-baza.262/) и [Правилам](https://forum.gta5rp.com/categories/pravila-servera-blackberry.224/) Сервера [Blackberry](https://forum.gta5rp.com/#igrovye-servera.13) Проекта [GTA5RP](https://gta5rp.com/). Продукт спроектирован для Сотрудников Гос. Структур: минимизирует alt-tab, ускоряет процесс ориентировки по форуму и обеспечивает актуальную информацию.
 
 ## ⚙️ Ключевой функционал
 * **Глобальный вызов:** Мгновенный рендер интерфейса поверх всех окон по нажатию `Alt + E`.
