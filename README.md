@@ -23,4 +23,5 @@
 * **Менеджмент & Организатор Проекта:** Discord: `cheterin`
 * **Сообщество:** [404 : Server Not Found](https://discord.gg/cheterin)
 
-*ChetTeam © 2026 | Blackberry (GTA5RP)*
+---
+*Copyright © 2026 ChetTeam. All rights reserved.*
