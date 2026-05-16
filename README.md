@@ -19,8 +19,7 @@
 *Перед установкой обязательно ознакомьтесь с [Условиями использования](TERMS.md).*
 
 ## 📞 Обратная связь и Поддержка
-* **Разработчик (Code & UI):** Discord: `nanda070`
-* **Менеджмент & Дистрибуция:** Discord: `cheterin`
+* **Менеджмент & Организатор Проекта:** Discord: `cheterin`
 * **Сообщество:** [404 : Server Not Found](https://discord.gg/cheterin)
 
 *ChetTeam © 2026 | Blackberry (GTA5RP)*
