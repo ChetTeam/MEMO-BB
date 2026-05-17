@@ -26,13 +26,16 @@
         .cat-uk { background: rgba(255, 30, 86, 0.1); color: #ff1e56; border-bottom: 1px solid rgba(255, 30, 86, 0.2); }
         .cat-ak { background: rgba(245, 158, 11, 0.1); color: #f59e0b; border-bottom: 1px solid rgba(245, 158, 11, 0.2); }
         .cat-dk { background: rgba(16, 185, 129, 0.1); color: #10b981; border-bottom: 1px solid rgba(16, 185, 129, 0.2); }
+        .cat-pk { background: rgba(56, 189, 248, 0.1); color: #38bdf8; border-bottom: 1px solid rgba(56, 189, 248, 0.2); }
+        .cat-other { background: rgba(161, 161, 170, 0.1); color: #a1a1aa; border-bottom: 1px solid rgba(161, 161, 170, 0.2); }
+        .cat-links { background: rgba(139, 92, 246, 0.1); color: #8b5cf6; border-bottom: 1px solid rgba(139, 92, 246, 0.2); }
     </style>
 </head>
 <body class="bg-[#0b0b0f] text-zinc-200 h-screen flex flex-col border border-[#1e1e2f] rounded-lg overflow-hidden shadow-2xl relative">
 
     <div class="drag bg-[#111116] px-4 py-3 flex justify-between items-center border-b border-[#1c1c2b] z-50">
         <div class="flex items-center gap-2">
-            <span class="text-[#ff1e56] font-black text-xs tracking-wider uppercase">LIFE5RP</span>
+            <span class="text-[#ff1e56] font-black text-xs tracking-wider uppercase">GTA5RP</span>
             <span class="text-zinc-500 font-bold text-[11px] tracking-widest">MEMO LAWS</span>
         </div>
         <div class="flex items-center gap-4">
@@ -66,9 +69,10 @@
                     <div class="absolute left-[-4px] top-1.5 w-2 h-2 rounded-full bg-[#ff1e56] ring-4 ring-[#121218]"></div>
                     <div class="text-xs font-bold text-white mb-1.5 tracking-wider">18.05.2026</div>
                     <div class="text-[11px] text-zinc-400 space-y-1.5 leading-relaxed">
-                        <p>• Реализовано пофразовое копирование частей.</p>
-                        <p>• Визуальное выделение "Частей" интерактивными бейджами.</p>
-                        <p>• Интеграция сроков в УК и АК.</p>
+                        <p>• Интеграция процессуальных таймингов.</p>
+                        <p>• Добавлены основания и порядок задержания.</p>
+                        <p>• Интегрированы активные реестры.</p>
+                        <p>• Внедрена Hot-Swap архитектура базы данных.</p>
                     </div>
                 </div>
             </div>
@@ -133,7 +137,35 @@
         };
 
         const miniForumData = [
-            { cat: 'uk', title: 'Уголовный кодекс', items: [
+            { cat: 'links', title: 'Реестры и Полезные Ссылки', type: 'text', content: `
+                <div class="grid grid-cols-2 gap-3">
+                    <div onclick="window.api.openExternal('https://docs.google.com/spreadsheets/d/1TEEJFp5h3AmMkzZ232eLDHov0FfjUs4geUVTO7xGQyw/edit?usp=sharing')" class="no-drag bg-[#12121a] border border-[#232336] p-3 rounded cursor-pointer hover:border-[#8b5cf6] transition-all group flex flex-col items-center justify-center text-center shadow-sm">
+                        <span class="text-zinc-200 font-bold text-[11px] uppercase tracking-wider group-hover:text-[#8b5cf6] transition-colors">Реестр Коллекционеров</span>
+                        <span class="text-zinc-500 text-[9px] font-black tracking-widest mt-1 group-hover:text-[#8b5cf6]/70 transition-colors"/span>
+                    </div>
+                    <div onclick="window.api.openExternal('https://docs.google.com/spreadsheets/d/1AN15T9HJOx1W4NIuu8U4fSfkZtJQRzBkFqMcSI3W0Vc/edit?gid=0#gid=0')" class="no-drag bg-[#12121a] border border-[#232336] p-3 rounded cursor-pointer hover:border-[#8b5cf6] transition-all group flex flex-col items-center justify-center text-center shadow-sm">
+                        <span class="text-zinc-200 font-bold text-[11px] uppercase tracking-wider group-hover:text-[#8b5cf6] transition-colors">Реестр Адвокатов</span>
+                        <span class="text-zinc-500 text-[9px] font-black tracking-widest mt-1 group-hover:text-[#8b5cf6]/70 transition-colors"/span>
+                    </div>
+                    <div onclick="window.api.openExternal('https://docs.google.com/spreadsheets/d/1k2k7VlEtjcKQgGdCP44unoHtYxp7YKFu3si0B0pH5fc/edit?gid=270058052#gid=270058052')" class="no-drag bg-[#12121a] border border-[#232336] p-3 rounded cursor-pointer hover:border-[#8b5cf6] transition-all group flex flex-col items-center justify-center text-center shadow-sm">
+                        <span class="text-zinc-200 font-bold text-[11px] uppercase tracking-wider group-hover:text-[#8b5cf6] transition-colors">Реестр Организаций</span>
+                        <span class="text-zinc-500 text-[9px] font-black tracking-widest mt-1 group-hover:text-[#8b5cf6]/70 transition-colors"/span>
+                    </div>
+                    <div onclick="window.api.openExternal('https://docs.google.com/spreadsheets/d/1Q3O7JrZfyua-mbkCtdLNxBVxjO6HBNfrY-4zNfWi7Jo/edit?gid=0#gid=0')" class="no-drag bg-[#12121a] border border-[#232336] p-3 rounded cursor-pointer hover:border-[#8b5cf6] transition-all group flex flex-col items-center justify-center text-center shadow-sm">
+                        <span class="text-zinc-200 font-bold text-[11px] uppercase tracking-wider group-hover:text-[#8b5cf6] transition-colors">Реестр Пилотов</span>
+                        <span class="text-zinc-500 text-[9px] font-black tracking-widest mt-1 group-hover:text-[#8b5cf6]/70 transition-colors"/span>
+                    </div>
+                    <div onclick="window.api.openExternal('https://docs.google.com/spreadsheets/d/1aP-DNiTUKfITCL4gerj_tBTjFV9_QleR3vwysTXHJpw/edit?gid=0#gid=0')" class="no-drag bg-[#12121a] border border-[#232336] p-3 rounded cursor-pointer hover:border-[#8b5cf6] transition-all group flex flex-col items-center justify-center text-center shadow-sm">
+                        <span class="text-zinc-200 font-bold text-[11px] uppercase tracking-wider group-hover:text-[#8b5cf6] transition-colors">Реестр Аренды</span>
+                        <span class="text-zinc-500 text-[9px] font-black tracking-widest mt-1 group-hover:text-[#8b5cf6]/70 transition-colors"/span>
+                    </div>
+                    <div onclick="window.api.openExternal('https://forum.gta5rp.com/forums/zakonodatelnaja-baza.262/')" class="no-drag bg-[#12121a] border border-[#232336] p-3 rounded cursor-pointer hover:border-[#8b5cf6] transition-all group flex flex-col items-center justify-center text-center shadow-sm">
+                        <span class="text-zinc-200 font-bold text-[11px] uppercase tracking-wider group-hover:text-[#8b5cf6] transition-colors">Законодательная База</span>
+                        <span class="text-zinc-500 text-[9px] font-black tracking-widest mt-1 group-hover:text-[#8b5cf6]/70 transition-colors"/span>
+                    </div>
+                </div>
+            `},
+            { cat: 'uk', title: 'Уголовный кодекс', type: 'table', items: [
                 { id: '21', text: 'Соучастники преступления несут ответственность в равном объеме', time: '-' },
                 { id: '37', text: 'Умышленное нанесение особо тяжких телесных повреждений', time: '30-60 мин' },
                 { id: '37.3', text: 'Причинение смерти по неосторожности ((IC смерть персонажа))', time: '30-80 мин' },
@@ -155,7 +187,7 @@
                 { id: '90', text: 'Насилие, не опасное для жизни, либо угроза гос.сотруднику', time: '60 мин' },
                 { id: '95', text: 'Нарушение 3-х или более АК', time: '60 мин' }
             ]},
-            { cat: 'ak', title: 'Административный кодекс', items: [
+            { cat: 'ak', title: 'Административный кодекс', type: 'table', items: [
                 { id: '15 ч.1', text: 'Мелкое хулиганство', time: '10-20 мин или 5.000-10.000$' },
                 { id: '18 ч.А', text: 'Нахождение в общ. местах в неприемлемом виде (Без одежды)', time: '10-30 мин или 5.000-10.000$' },
                 { id: '18 ч.Б', text: 'Нахождение в неприемлемом виде где угодно (В маске)', time: '10-30 мин или 5.000-10.000$' },
@@ -180,7 +212,7 @@
                 { id: '53 ч.1', text: 'Клевета', time: '20-40 мин или 15.000-25.000$' },
                 { id: '57 ч.1', text: 'Оскорбление, унижение чести и достоинства гражданина', time: '20-30 мин или 5.000-15.000$' }
             ]},
-            { cat: 'dk', title: 'Дорожный кодекс', items: [
+            { cat: 'dk', title: 'Дорожный кодекс', type: 'table', items: [
                 { id: '4', text: 'Водитель обязан выйти, предъявить ВУ, тех паспорт, личн. паспорт', time: '51 АК' },
                 { id: '5', text: 'Водитель обязан остановиться по требованию', time: '51 АК' },
                 { id: '7', text: 'При аварии, водитель обязан остановиться и не трогаться с места', time: 'До 7.000$' },
@@ -196,7 +228,56 @@
                 { id: '58', text: 'Пересечение разделительной полосы', time: 'До 2.000$' },
                 { id: '66', text: 'ТС без регистрации / без номеров / с отличающ. номерами', time: '-Права + до 10.000$' },
                 { id: '67', text: 'Незаконное использован. опознавательных элементов служеб. т.с', time: '-Права + 40 мин' }
-            ]}
+            ]},
+            { cat: 'other', title: 'Иное (Спецсредства, Тайминги, Коды)', type: 'text', content: `
+                <div class="flex gap-8">
+                    <div class="flex-1 space-y-3">
+                        <div><span class="text-zinc-200 font-black tracking-wide uppercase">Спецсредства</span><br><span class="text-zinc-400 leading-snug">Тайзер, наручники<br>Бронежилет, дубинка<br>Светошумовая граната<br>Дымовые гранатометы</span></div>
+                        <div><span class="text-zinc-200 font-black tracking-wide uppercase">Тайминги</span><br><span class="text-zinc-400 leading-snug">Ответ адвоката на вызов — 3 мин<br>Ожидание адвоката — 10 мин<br>Телефонный разговор — 3 мин<br>Конфиденциальная беседа — 10 мин<br>Ожидание начальства/прокурора — 15 мин<br>Допрос и задержание — 60 мин</span></div>
+                        <div><span class="text-zinc-200 font-black tracking-wide uppercase">Звезды розыска</span><br><span class="text-zinc-400 leading-snug">★ — 30 мин | ★★ — 1 час | ★★★ — 2 часа<br>★★★★ — 3 часа | ★★★★★ — 5 часов</span></div>
+                    </div>
+                    <div class="flex-1 space-y-3">
+                        <div><span class="text-zinc-200 font-black tracking-wide uppercase">Тен-коды</span><br><span class="text-zinc-400 leading-snug">10-0 — Отмена | 10-3 — Радиомолчание<br>10-4 — Принял | 10-6 — Отказано<br>10-5 — Повторите | 10-7 — Ожидайте<br>10-20 — Местоположение | 10-77 — Время ожидания<br>10-30 — Поставка</span></div>
+                        <div><span class="text-zinc-200 font-black tracking-wide uppercase">Особо охраняемые объекты</span><br><span class="text-zinc-400 leading-snug">- ВПП, ангары аэропорта и прилегающие территории<br>- Федеральная тюрьма и Форт Занкудо<br>- Авианосец USS</span></div>
+                        <div><span class="text-zinc-200 font-black tracking-wide uppercase">Охраняемые объекты</span><br><span class="text-zinc-400 leading-snug">- Участки FIB, LSSD, LSPD (кроме холла)<br>- Участки GOV (кроме холла)<br>- Служебные помещения и парковки EMS</span></div>
+                    </div>
+                </div>
+                <div class="mt-4 pt-4 border-t border-[#1f1f2e]">
+                    <span class="text-[#ff1e56] font-black tracking-wide uppercase">Правило Миранды (2 раза)</span><br>
+                    <span class="text-zinc-300 italic">«Вы имеете право хранить молчание. Всё, что вы скажете, может и будет использовано против вас в суде. Вы имеете право на один телефонный звонок и на адвоката. Если у вас нет средств на адвоката, он будет запрошен. Вы понимаете свои права?»</span>
+                    <br><span class="text-zinc-500 text-[10px] uppercase font-bold mt-1 inline-block">Примечание: После 2-х повторов Миранда считается зачитанной, более не зачитывается.</span>
+                </div>
+            `},
+            { cat: 'pk', title: 'Порядок Задержания и Основания', type: 'text', content: `
+                <div class="space-y-4">
+                    <div>
+                        <span class="text-[#38bdf8] font-black tracking-wide uppercase block mb-1">Основания для задержания (Статья 16 ПК)</span>
+                        <div class="text-zinc-400 space-y-1">
+                            <p><span class="text-white font-bold">ч. 1</span> Лицо может быть задержано по подозрению в совершении правонарушения.</p>
+                            <p><span class="text-white font-bold">ч. 2</span> Лицо может быть задержано при наличии хотя бы одного из оснований: <br>
+                            а) Застигнуто в момент правонарушения; б) Явные следы преступления на лице/одежде/жилище; в) 3+ свидетелей; г) Фото/видеофиксация; д) Нормативный документ/указ; е) Ориентировка; ж) Законное требование (Губернатор, ВЦГ, ГП, ПВС); з) Нахождение в боло-розыске.</p>
+                            <p><span class="text-white font-bold">ч. 3</span> Не может быть задержано только на основании ношения оружия (за спиной/на ремне). В кобуре — запросить документы.</p>
+                            <p><span class="text-white font-bold">ч. 4</span> Если лицо находится в боло-розыске.</p>
+                            <p><span class="text-white font-bold">ч. 5</span> Не может быть задержано только на основании ношения гос. брони (запросить документы).</p>
+                            <p class="text-zinc-500 text-[10px] uppercase font-bold mt-1">Примечание: В случае с гос. сотрудниками запрашивать паспорта дополнительно ЗАПРЕЩЕНО.</p>
+                        </div>
+                    </div>
+                    <div class="h-px w-full bg-[#1f1f2e]"></div>
+                    <div>
+                        <span class="text-[#38bdf8] font-black tracking-wide uppercase block mb-1">Порядок задержания (Статья 17 ПК)</span>
+                        <div class="text-zinc-400 space-y-2">
+                            <p><span class="text-white font-bold">ч. 1</span> При ведении следствия: <br>
+                            а) Наручники; б) УДО/нашивка; в) Первичный обыск (при необходимости); г) Основания и Миранда; д) Доставить в КПЗ; е) Проверить документы, неприкосновенность, розыск; ж) Реализовать права (вызвать руководство/ОГП для гос); з) Доставить в участок/штаб; и) Допрос.</p>
+                            <p><span class="text-white font-bold">ч. 2</span> По приказу (Губернатор, ВЦГ, ГП, ордера): <br>
+                            а) Наручники; б) УДО/нашивка; в) Первичный обыск; г) Короткая Миранда; д) Доставить в КПЗ; е) Проверить документы, неприкосновенность, розыск; ж) Телефонный звонок; з) Разъяснить основания; и) Вызвать руководство (если гос).</p>
+                        </div>
+                    </div>
+                    <div class="mt-2 p-3 bg-[#161622] rounded border border-[#252538]">
+                        <span class="text-white font-bold text-[10px] uppercase tracking-wider">Краткая Миранда (ч. 2 ст. 17 ПК):</span><br>
+                        <span class="text-zinc-300 italic text-[11px]">«Вы имеете право хранить молчание. Всё, что вы скажете, может и будет использовано против вас в суде. Также вы имеете право на один телефонный звонок. Вы понимаете свои права?»</span>
+                    </div>
+                </div>
+            `}
         ];
 
         async function init() {
@@ -341,17 +422,23 @@
 
         function renderMiniForum() {
             const container = document.getElementById('mf-container');
-            let html = `<div class="mf-header">№</div><div class="mf-header">Статья</div><div class="mf-header">Наказание</div>`;
+            let html = '';
             
             miniForumData.forEach(block => {
                 html += `<div class="mf-cell cat-${block.cat} col-span-3 font-bold uppercase tracking-wider text-[11px] py-2">${block.title}</div>`;
-                block.items.forEach(item => {
-                    html += `
-                        <div class="mf-cell font-mono text-[11px] font-bold text-white cursor-pointer hover:bg-[#1f1f2e] transition-colors" onclick="copyToClipboard('${item.id} ${block.cat.toUpperCase()}')">${item.id}</div>
-                        <div class="mf-cell mf-cell-left">${item.text}</div>
-                        <div class="mf-cell font-bold text-[10px] text-zinc-400">${item.time}</div>
-                    `;
-                });
+                
+                if (block.type === 'text') {
+                    html += `<div class="col-span-3 bg-[#0b0b0f] p-5 text-[11px] text-zinc-300 leading-relaxed">${block.content}</div>`;
+                } else {
+                    html += `<div class="mf-header">№</div><div class="mf-header">Статья</div><div class="mf-header">Наказание</div>`;
+                    block.items.forEach(item => {
+                        html += `
+                            <div class="mf-cell font-mono text-[11px] font-bold text-white cursor-pointer hover:bg-[#1f1f2e] transition-colors" onclick="copyToClipboard('${item.id} ${block.cat.toUpperCase()}')">${item.id}</div>
+                            <div class="mf-cell mf-cell-left">${item.text}</div>
+                            <div class="mf-cell font-bold text-[10px] text-zinc-400">${item.time}</div>
+                        `;
+                    });
+                }
             });
             container.innerHTML = html;
         }
