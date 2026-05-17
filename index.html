@@ -54,7 +54,8 @@
                 <div class="bg-[#121218] border border-[#1f1f2e] rounded-lg p-5">
                     <div class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-4">Режимы базы данных</div>
                     <button onclick="switchView('general')" class="no-drag w-full py-4 mb-3 rounded bg-[#ff1e56] text-white font-black uppercase tracking-wider hover:bg-[#e0184b] transition-all shadow-[0_0_15px_rgba(255,30,86,0.15)] text-sm">Общий Форум</button>
-                    <button onclick="switchView('mini')" class="no-drag w-full py-4 rounded bg-[#181824] border border-[#252538] text-zinc-300 font-bold uppercase tracking-wider hover:bg-[#1e1e2d] transition-all text-sm">Мини-Форум</button>
+                    <button onclick="switchView('mini')" class="no-drag w-full py-4 mb-3 rounded bg-[#181824] border border-[#252538] text-zinc-300 font-bold uppercase tracking-wider hover:bg-[#1e1e2d] transition-all text-sm">Мини-Форум</button>
+                    <button onclick="switchView('macros')" class="no-drag w-full py-4 rounded bg-[#181824] border border-[#252538] text-zinc-300 font-bold uppercase tracking-wider hover:bg-[#1e1e2d] transition-all text-sm">Макросы</button>
                 </div>
 
                 <div class="bg-[#121218] border border-[#1f1f2e] rounded-lg p-5">
@@ -69,10 +70,10 @@
                     <div class="absolute left-[-4px] top-1.5 w-2 h-2 rounded-full bg-[#ff1e56] ring-4 ring-[#121218]"></div>
                     <div class="text-xs font-bold text-white mb-1.5 tracking-wider">18.05.2026</div>
                     <div class="text-[11px] text-zinc-400 space-y-1.5 leading-relaxed">
+                        <p>• Интегрирована новая вкладка макросов со сторонним хранилищем.</p>
                         <p>• Интеграция процессуальных таймингов.</p>
                         <p>• Добавлены основания и порядок задержания.</p>
                         <p>• Интегрированы активные реестры.</p>
-                        <p>• Внедрена Hot-Swap архитектура базы данных.</p>
                     </div>
                 </div>
             </div>
@@ -84,7 +85,6 @@
                 <button onclick="window.api.openGithub()" class="no-drag flex items-center justify-center w-8 h-8 rounded bg-[#181824] border border-[#252538] text-zinc-400 hover:text-white hover:border-zinc-500 transition-all cursor-pointer shadow-sm">
                     <svg class="w-[18px] h-[18px]" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
                 </button>
-                
                 <button onclick="window.api.openDiscord()" class="no-drag flex items-center gap-2 text-[11px] font-black text-zinc-400 hover:text-[#5865F2] transition-colors uppercase tracking-widest cursor-pointer">
                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
                     404 : Server Not Found
@@ -98,20 +98,25 @@
             <button id="tab-laws" onclick="switchMainTab('laws')" class="flex-1 py-2 rounded bg-[#ff1e56] text-white font-black transition-all uppercase tracking-wider shadow-[0_0_15px_rgba(255,30,86,0.15)]">ЗАКОНЫ</button>
             <button id="tab-rules" onclick="switchMainTab('rules')" class="flex-1 py-2 rounded bg-[#16161f] text-zinc-400 font-bold uppercase tracking-wider hover:bg-[#1e1e2a] transition-all">ПРАВИЛА</button>
         </div>
-
         <div class="bg-[#08080c] border-b border-[#171724] px-4 py-2 flex items-center flex-shrink-0">
             <div id="filter-bar" class="filter-scroll flex gap-1.5 overflow-x-auto w-full text-[10px] font-black tracking-wider uppercase"></div>
         </div>
-
         <div class="p-4 bg-[#08080c]/50 flex-shrink-0">
             <input type="text" id="search" placeholder="Поиск статьи или номера пункта..." class="no-drag w-full bg-[#12121a] border border-[#232336] rounded-md px-3 py-2 text-sm focus:outline-none focus:border-[#ff1e56] transition-all text-white placeholder-zinc-600" autocomplete="off" spellcheck="false">
         </div>
-
         <div id="results" class="flex-grow overflow-y-auto custom-scroll px-4 pb-4 space-y-2.5"></div>
     </div>
 
     <div id="view-mini" class="hidden min-h-0 flex-grow bg-[#0b0b0f] overflow-y-auto custom-scroll p-4">
         <div id="mf-container" class="mf-grid rounded-md overflow-hidden shadow-lg"></div>
+    </div>
+
+    <div id="view-macros" class="hidden min-h-0 flex-grow bg-[#0b0b0f] overflow-y-auto custom-scroll p-4">
+        <div class="bg-[#121218] border border-[#1f1f2e] p-4 rounded-md mb-4 text-[11px] text-zinc-300 leading-relaxed">
+            <span class="text-[#ff1e56] font-black tracking-wide uppercase block mb-1">📋 Инструкция по импорту:</span>
+            Импорт происходит в следующем порядке: копируем готовый код, создаем сценарий (F10 - Настройки - Макросы - «плюс»), выбираем «Импорт», вставляем код в соответствующее поле и жмём «Загрузить».
+        </div>
+        <div id="macros-container" class="space-y-2"></div>
     </div>
 
     <div id="footer-opacity" class="hidden bg-[#111116] border-t border-[#1c1c2b] px-4 py-3 flex justify-between items-center text-[10px] font-bold text-zinc-500 uppercase tracking-wide flex-shrink-0">
@@ -127,6 +132,7 @@
 
     <script>
         let db = { laws: [], rules: [] };
+        let macrosCache = []; // Локальный кэш макросов
         let currentMainTab = 'laws';
         let currentFilter = 'ALL';
         let fuse;
@@ -141,27 +147,27 @@
                 <div class="grid grid-cols-2 gap-3">
                     <div onclick="window.api.openExternal('https://docs.google.com/spreadsheets/d/1TEEJFp5h3AmMkzZ232eLDHov0FfjUs4geUVTO7xGQyw/edit?usp=sharing')" class="no-drag bg-[#12121a] border border-[#232336] p-3 rounded cursor-pointer hover:border-[#8b5cf6] transition-all group flex flex-col items-center justify-center text-center shadow-sm">
                         <span class="text-zinc-200 font-bold text-[11px] uppercase tracking-wider group-hover:text-[#8b5cf6] transition-colors">Реестр Коллекционеров</span>
-                        <span class="text-zinc-500 text-[9px] font-black tracking-widest mt-1 group-hover:text-[#8b5cf6]/70 transition-colors"/span>
+                        <span class="text-zinc-500 text-[9px] font-black tracking-widest mt-1 group-hover:text-[#8b5cf6]/70 transition-colors">( Кликабельно )</span>
                     </div>
                     <div onclick="window.api.openExternal('https://docs.google.com/spreadsheets/d/1AN15T9HJOx1W4NIuu8U4fSfkZtJQRzBkFqMcSI3W0Vc/edit?gid=0#gid=0')" class="no-drag bg-[#12121a] border border-[#232336] p-3 rounded cursor-pointer hover:border-[#8b5cf6] transition-all group flex flex-col items-center justify-center text-center shadow-sm">
                         <span class="text-zinc-200 font-bold text-[11px] uppercase tracking-wider group-hover:text-[#8b5cf6] transition-colors">Реестр Адвокатов</span>
-                        <span class="text-zinc-500 text-[9px] font-black tracking-widest mt-1 group-hover:text-[#8b5cf6]/70 transition-colors"/span>
+                        <span class="text-zinc-500 text-[9px] font-black tracking-widest mt-1 group-hover:text-[#8b5cf6]/70 transition-colors">( Кликабельно )</span>
                     </div>
                     <div onclick="window.api.openExternal('https://docs.google.com/spreadsheets/d/1k2k7VlEtjcKQgGdCP44unoHtYxp7YKFu3si0B0pH5fc/edit?gid=270058052#gid=270058052')" class="no-drag bg-[#12121a] border border-[#232336] p-3 rounded cursor-pointer hover:border-[#8b5cf6] transition-all group flex flex-col items-center justify-center text-center shadow-sm">
                         <span class="text-zinc-200 font-bold text-[11px] uppercase tracking-wider group-hover:text-[#8b5cf6] transition-colors">Реестр Организаций</span>
-                        <span class="text-zinc-500 text-[9px] font-black tracking-widest mt-1 group-hover:text-[#8b5cf6]/70 transition-colors"/span>
+                        <span class="text-zinc-500 text-[9px] font-black tracking-widest mt-1 group-hover:text-[#8b5cf6]/70 transition-colors">( Кликабельно )</span>
                     </div>
                     <div onclick="window.api.openExternal('https://docs.google.com/spreadsheets/d/1Q3O7JrZfyua-mbkCtdLNxBVxjO6HBNfrY-4zNfWi7Jo/edit?gid=0#gid=0')" class="no-drag bg-[#12121a] border border-[#232336] p-3 rounded cursor-pointer hover:border-[#8b5cf6] transition-all group flex flex-col items-center justify-center text-center shadow-sm">
                         <span class="text-zinc-200 font-bold text-[11px] uppercase tracking-wider group-hover:text-[#8b5cf6] transition-colors">Реестр Пилотов</span>
-                        <span class="text-zinc-500 text-[9px] font-black tracking-widest mt-1 group-hover:text-[#8b5cf6]/70 transition-colors"/span>
+                        <span class="text-zinc-500 text-[9px] font-black tracking-widest mt-1 group-hover:text-[#8b5cf6]/70 transition-colors">( Кликабельно )</span>
                     </div>
                     <div onclick="window.api.openExternal('https://docs.google.com/spreadsheets/d/1aP-DNiTUKfITCL4gerj_tBTjFV9_QleR3vwysTXHJpw/edit?gid=0#gid=0')" class="no-drag bg-[#12121a] border border-[#232336] p-3 rounded cursor-pointer hover:border-[#8b5cf6] transition-all group flex flex-col items-center justify-center text-center shadow-sm">
                         <span class="text-zinc-200 font-bold text-[11px] uppercase tracking-wider group-hover:text-[#8b5cf6] transition-colors">Реестр Аренды</span>
-                        <span class="text-zinc-500 text-[9px] font-black tracking-widest mt-1 group-hover:text-[#8b5cf6]/70 transition-colors"/span>
+                        <span class="text-zinc-500 text-[9px] font-black tracking-widest mt-1 group-hover:text-[#8b5cf6]/70 transition-colors">( Кликабельно )</span>
                     </div>
                     <div onclick="window.api.openExternal('https://forum.gta5rp.com/forums/zakonodatelnaja-baza.262/')" class="no-drag bg-[#12121a] border border-[#232336] p-3 rounded cursor-pointer hover:border-[#8b5cf6] transition-all group flex flex-col items-center justify-center text-center shadow-sm">
                         <span class="text-zinc-200 font-bold text-[11px] uppercase tracking-wider group-hover:text-[#8b5cf6] transition-colors">Законодательная База</span>
-                        <span class="text-zinc-500 text-[9px] font-black tracking-widest mt-1 group-hover:text-[#8b5cf6]/70 transition-colors"/span>
+                        <span class="text-zinc-500 text-[9px] font-black tracking-widest mt-1 group-hover:text-[#8b5cf6]/70 transition-colors">( Кликабельно )</span>
                     </div>
                 </div>
             `},
@@ -256,7 +262,7 @@
                             <p><span class="text-white font-bold">ч. 1</span> Лицо может быть задержано по подозрению в совершении правонарушения.</p>
                             <p><span class="text-white font-bold">ч. 2</span> Лицо может быть задержано при наличии хотя бы одного из оснований: <br>
                             а) Застигнуто в момент правонарушения; б) Явные следы преступления на лице/одежде/жилище; в) 3+ свидетелей; г) Фото/видеофиксация; д) Нормативный документ/указ; е) Ориентировка; ж) Законное требование (Губернатор, ВЦГ, ГП, ПВС); з) Нахождение в боло-розыске.</p>
-                            <p><span class="text-white font-bold">ч. 3</span> Не может быть задержано только на основании ношения оружия (за спиной/на ремне). В кобуре — запросить документы.</p>
+                            <p><span class="text-white font-bold">ч. 3</span> Не может быть задержано только на основании ношения оружия (за спиной/на ремне), в кобуре необходимо запросить документы.</p>
                             <p><span class="text-white font-bold">ч. 4</span> Если лицо находится в боло-розыске.</p>
                             <p><span class="text-white font-bold">ч. 5</span> Не может быть задержано только на основании ношения гос. брони (запросить документы).</p>
                             <p class="text-zinc-500 text-[10px] uppercase font-bold mt-1">Примечание: В случае с гос. сотрудниками запрашивать паспорта дополнительно ЗАПРЕЩЕНО.</p>
@@ -267,9 +273,9 @@
                         <span class="text-[#38bdf8] font-black tracking-wide uppercase block mb-1">Порядок задержания (Статья 17 ПК)</span>
                         <div class="text-zinc-400 space-y-2">
                             <p><span class="text-white font-bold">ч. 1</span> При ведении следствия: <br>
-                            а) Наручники; б) УДО/нашивка; в) Первичный обыск (при необходимости); г) Основания и Миранда; д) Доставить в КПЗ; е) Проверить документы, неприкосновенность, розыск; ж) Реализовать права (вызвать руководство/ОГП для гос); з) Доставить в участок/штаб; и) Допрос.</p>
+                            а) Наручники; б) УДО/нашивка; в) Первичный обыск (при необходимости); г) Основания и Миранда; д) Доставить в КПЗ/ФТ; е) Проверить документы, неприкосновенность, розыск; ж) Реализовать права (вызвать руководство/ОГП для гос); з) Доставить в участок/штаб; и) Допрос.</p>
                             <p><span class="text-white font-bold">ч. 2</span> По приказу (Губернатор, ВЦГ, ГП, ордера): <br>
-                            а) Наручники; б) УДО/нашивка; в) Первичный обыск; г) Короткая Миранда; д) Доставить в КПЗ; е) Проверить документы, неприкосновенность, розыск; ж) Телефонный звонок; з) Разъяснить основания; и) Вызвать руководство (если гос).</p>
+                            а) Наручники; б) УДО/нашивка; в) Первичный обыск; г) Короткая Миранда; д) Доставить в КПЗ/ФТ; е) Проверить документы, неприкосновенность, розыск; ж) Телефонный звонок; з) Разъяснить основания; и) Вызвать руководство (если гос).</p>
                         </div>
                     </div>
                     <div class="mt-2 p-3 bg-[#161622] rounded border border-[#252538]">
@@ -282,7 +288,9 @@
 
         async function init() {
             db = await window.api.getData();
+            const macros = await window.api.getMacros(); // Чтение макросов
             renderMiniForum();
+            renderMacros(macros); // Рендер макросов
             switchView('menu');
             renderFilterBar();
             updateFuse();
@@ -293,6 +301,7 @@
             document.getElementById('view-menu').classList.add('hidden');
             document.getElementById('view-general').classList.add('hidden');
             document.getElementById('view-mini').classList.add('hidden');
+            document.getElementById('view-macros').classList.add('hidden');
             
             document.getElementById(`view-${viewName}`).classList.remove('hidden');
 
@@ -441,6 +450,30 @@
                 }
             });
             container.innerHTML = html;
+        }
+
+        // ДВИЖОК СЕПАРАТНОГО РЕНДЕРА МАКРОСОВ
+        function renderMacros(macros) {
+            macrosCache = macros;
+            const container = document.getElementById('macros-container');
+            if (!macros || macros.length === 0) {
+                container.innerHTML = `<div class="text-zinc-600 text-xs text-center py-8 font-bold tracking-wider uppercase">Список макросов пуст. Заполните macros.json</div>`;
+                return;
+            }
+
+            container.innerHTML = macros.map((m, index) => `
+                <div onclick="copyMacroByIndex(${index})" class="no-drag bg-[#12121a] border border-[#232336] p-4 rounded-lg cursor-pointer hover:border-[#ff1e56]/40 transition-all flex justify-between items-center group">
+                    <span class="text-zinc-200 font-bold text-xs uppercase tracking-wider group-hover:text-[#ff1e56] transition-colors">${m.name}</span>
+                    <span class="text-zinc-500 text-[10px] font-black tracking-widest uppercase group-hover:text-[#ff1e56]/70 transition-colors">( Нажми для копирования )</span>
+                </div>
+            `).join('');
+        }
+
+        // Копирование по индексу (защита от ломающих кавычек)
+        function copyMacroByIndex(index) {
+            if (macrosCache[index]) {
+                copyToClipboard(macrosCache[index].code);
+            }
         }
 
         function copyToClipboard(text) {

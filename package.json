@@ -1,6 +1,6 @@
 {
-  "name": "gta5rp-memo-laws",
-  "version": "1.1.0",
+  "name": "GTA5RP-MEMO",
+  "version": "1.1.2",
   "description": "Автономный оверлей законодательной базы",
   "main": "main.js",
   "scripts": {
