@@ -17,7 +17,7 @@
         .filter-scroll::-webkit-scrollbar { display: none; }
         .filter-scroll { -ms-overflow-style: none; scrollbar-width: none; }
         mark { background: rgba(255, 30, 86, 0.25); color: #ff1e56; font-weight: 700; padding: 0 2px; border-radius: 2px; }
-        
+
         .mf-grid { display: grid; grid-template-columns: 70px 1fr 140px; gap: 1px; background: #1f1f2e; border: 1px solid #1f1f2e; }
         .mf-header { background: #161622; font-weight: 800; font-size: 10px; text-transform: uppercase; color: #a1a1aa; padding: 8px; text-align: center; }
         .mf-cell { background: #0b0b0f; padding: 8px 12px; font-size: 11px; color: #d4d4d8; display: flex; align-items: center; justify-content: center; text-align: center; }
@@ -60,7 +60,10 @@
 
                 <div class="bg-[#121218] border border-[#1f1f2e] rounded-lg p-5">
                     <div class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-3">Горячая клавиша вызова</div>
-                    <div class="w-full py-3 rounded bg-[#0b0b0f] border border-[#1f1f2e] text-center text-zinc-400 font-mono text-sm tracking-widest">Alt + E</div>
+                    <div class="flex gap-2">
+                        <input type="text" id="hotkey-input" class="no-drag w-full py-2 px-3 rounded bg-[#0b0b0f] border border-[#1f1f2e] text-center text-zinc-300 font-mono text-xs tracking-wider focus:outline-none focus:border-[#ff1e56]" placeholder="Alt+E">
+                        <button onclick="saveNewHotkey()" class="no-drag px-4 rounded bg-[#181824] border border-[#252538] text-zinc-300 font-bold text-xs uppercase tracking-wider hover:bg-[#1e1e2d] transition-all">ОК</button>
+                    </div>
                 </div>
             </div>
 
@@ -70,8 +73,9 @@
                     <div class="absolute left-[-4px] top-1.5 w-2 h-2 rounded-full bg-[#ff1e56] ring-4 ring-[#121218]"></div>
                     <div class="text-xs font-bold text-white mb-1.5 tracking-wider">18.05.2026</div>
                     <div class="text-[11px] text-zinc-400 space-y-1.5 leading-relaxed">
-                        <p>• Интегрирована новая вкладка макросов со сторонним хранилищем.</p>
-                        <p>• Интеграция процессуальных таймингов.</p>
+                        <p>• Интегрирована система системного трея.</p>
+                        <p>• Добавлена кастомизация горячей клавиши вызова.</p>
+                        <p>• Интегрирована новая вкладка макросов.</p>
                         <p>• Добавлены основания и порядок задержания.</p>
                         <p>• Интегрированы активные реестры.</p>
                     </div>
@@ -126,13 +130,23 @@
         </div>
     </div>
 
+    <div id="update-overlay" class="hidden absolute inset-0 bg-[#0b0b0f]/95 z-[100] flex-col items-center justify-center p-8 backdrop-blur-sm no-drag">
+        <div class="text-[#ff1e56] font-black text-xl mb-2 tracking-widest uppercase animate-pulse">Загрузка обновления</div>
+        <div class="text-zinc-400 text-[10px] mb-8 font-bold tracking-wider uppercase text-center">Пожалуйста, не закрывайте приложение</div>
+        
+        <div class="w-full max-w-sm bg-[#12121a] rounded-full h-1.5 border border-[#232336] overflow-hidden">
+            <div id="update-progress-bar" class="bg-[#ff1e56] h-1.5 rounded-full transition-all duration-200 shadow-[0_0_10px_rgba(255,30,86,0.5)]" style="width: 0%"></div>
+        </div>
+        <div id="update-progress-text" class="mt-4 text-zinc-300 font-mono text-xs font-bold tracking-widest">0%</div>
+    </div>
+
     <div id="toast" class="fixed bottom-16 left-1/2 -translate-x-1/2 bg-[#ff1e56] text-white shadow-[0_0_20px_rgba(255,30,86,0.4)] font-black px-5 py-2.5 rounded text-[11px] tracking-wider uppercase opacity-0 scale-95 pointer-events-none transition-all duration-200 z-50">
         Скопировано в буфер!
     </div>
 
     <script>
         let db = { laws: [], rules: [] };
-        let macrosCache = []; // Локальный кэш макросов
+        let macrosCache = [];
         let currentMainTab = 'laws';
         let currentFilter = 'ALL';
         let fuse;
@@ -189,8 +203,8 @@
                 { id: '70 ч.1', text: 'Побег из места лишения свободы, из-под ареста или из-под стражи', time: '60-90 мин' },
                 { id: '73', text: 'Получение взятки / Дача взятки', time: '60-120 мин' },
                 { id: '78', text: 'Незаконное задержание', time: '100 мин' },
-                { id: '89', text: 'Посягательство на жизнь сотрудника гос.структуры', time: '60-120 мин' },
-                { id: '90', text: 'Насилие, не опасное для жизни, либо угроза гос.сотруднику', time: '60 мин' },
+                { id: '89', text: 'Посягательство на life сотрудника гос.структуры', time: '60-120 мин' },
+                { id: '90', text: 'Насилие, не опасное для life, либо угроза гос.сотруднику', time: '60 мин' },
                 { id: '95', text: 'Нарушение 3-х или более АК', time: '60 мин' }
             ]},
             { cat: 'ak', title: 'Административный кодекс', type: 'table', items: [
@@ -262,7 +276,7 @@
                             <p><span class="text-white font-bold">ч. 1</span> Лицо может быть задержано по подозрению в совершении правонарушения.</p>
                             <p><span class="text-white font-bold">ч. 2</span> Лицо может быть задержано при наличии хотя бы одного из оснований: <br>
                             а) Застигнуто в момент правонарушения; б) Явные следы преступления на лице/одежде/жилище; в) 3+ свидетелей; г) Фото/видеофиксация; д) Нормативный документ/указ; е) Ориентировка; ж) Законное требование (Губернатор, ВЦГ, ГП, ПВС); з) Нахождение в боло-розыске.</p>
-                            <p><span class="text-white font-bold">ч. 3</span> Не может быть задержано только на основании ношения оружия (за спиной/на ремне), в кобуре необходимо запросить документы.</p>
+                            <p><span class="text-white font-bold">ч. 3</span> Не может быть задержано только на основании ношения оружия (за спиной/на ремне). В кобуре — запросить документы.</p>
                             <p><span class="text-white font-bold">ч. 4</span> Если лицо находится в боло-розыске.</p>
                             <p><span class="text-white font-bold">ч. 5</span> Не может быть задержано только на основании ношения гос. брони (запросить документы).</p>
                             <p class="text-zinc-500 text-[10px] uppercase font-bold mt-1">Примечание: В случае с гос. сотрудниками запрашивать паспорта дополнительно ЗАПРЕЩЕНО.</p>
@@ -273,9 +287,9 @@
                         <span class="text-[#38bdf8] font-black tracking-wide uppercase block mb-1">Порядок задержания (Статья 17 ПК)</span>
                         <div class="text-zinc-400 space-y-2">
                             <p><span class="text-white font-bold">ч. 1</span> При ведении следствия: <br>
-                            а) Наручники; б) УДО/нашивка; в) Первичный обыск (при необходимости); г) Основания и Миранда; д) Доставить в КПЗ/ФТ; е) Проверить документы, неприкосновенность, розыск; ж) Реализовать права (вызвать руководство/ОГП для гос); з) Доставить в участок/штаб; и) Допрос.</p>
+                            а) Наручники; б) УДО/нашивка; в) Первичный обыск (при необходимости); г) Основания и Миранда; д) Доставить в КПЗ; е) Проверить документы, неприкосновенность, розыск; ж) Реализовать права (вызвать руководство/ОГП для гос); з) Доставить в участок/штаб; и) Допрос.</p>
                             <p><span class="text-white font-bold">ч. 2</span> По приказу (Губернатор, ВЦГ, ГП, ордера): <br>
-                            а) Наручники; б) УДО/нашивка; в) Первичный обыск; г) Короткая Миранда; д) Доставить в КПЗ/ФТ; е) Проверить документы, неприкосновенность, розыск; ж) Телефонный звонок; з) Разъяснить основания; и) Вызвать руководство (если гос).</p>
+                            а) Наручники; б) УДО/нашивка; в) Первичный обыск; г) Короткая Миранда; д) Доставить в КПЗ; е) Проверить документы, неприкосновенность, розыск; ж) Телефонный звонок; з) Разъяснить основания; и) Вызвать руководство (если гос).</p>
                         </div>
                     </div>
                     <div class="mt-2 p-3 bg-[#161622] rounded border border-[#252538]">
@@ -288,20 +302,47 @@
 
         async function init() {
             db = await window.api.getData();
-            const macros = await window.api.getMacros(); // Чтение макросов
+            macrosCache = await window.api.getMacros();
+            
+            // Вывод текущего хоткея в поле ввода
+            if (window.api.getHotkey) {
+                const activeHotkey = await window.api.getHotkey();
+                document.getElementById('hotkey-input').value = activeHotkey;
+            }
+
             renderMiniForum();
-            renderMacros(macros); // Рендер макросов
+            renderMacros(macrosCache);
             switchView('menu');
             renderFilterBar();
             updateFuse();
-            search();
+            performSearch();
+        }
+
+        async function saveNewHotkey() {
+            const input = document.getElementById('hotkey-input');
+            const value = input.value.trim();
+            if (!value) return;
+
+            const success = await window.api.changeHotkey(value);
+            if (success) {
+                input.className = "no-drag w-full py-2 px-3 rounded bg-[#0b0b0f] border border-emerald-500 text-center text-emerald-400 font-mono text-xs tracking-wider focus:outline-none";
+                setTimeout(() => {
+                    input.className = "no-drag w-full py-2 px-3 rounded bg-[#0b0b0f] border border-[#1f1f2e] text-center text-zinc-300 font-mono text-xs tracking-wider focus:outline-none focus:border-[#ff1e56]";
+                }, 1000);
+            } else {
+                input.className = "no-drag w-full py-2 px-3 rounded bg-[#0b0b0f] border border-rose-500 text-center text-rose-400 font-mono text-xs tracking-wider focus:outline-none";
+                alert("Ошибка: Неверный формат клавиш. Используйте синтаксис Electron (например: Alt+E, Ctrl+Shift+K, F9)");
+                const oldHotkey = await window.api.getHotkey();
+                input.value = oldHotkey;
+                input.className = "no-drag w-full py-2 px-3 rounded bg-[#0b0b0f] border border-[#1f1f2e] text-center text-zinc-300 font-mono text-xs tracking-wider focus:outline-none focus:border-[#ff1e56]";
+            }
         }
 
         function switchView(viewName) {
-            document.getElementById('view-menu').classList.add('hidden');
-            document.getElementById('view-general').classList.add('hidden');
-            document.getElementById('view-mini').classList.add('hidden');
-            document.getElementById('view-macros').classList.add('hidden');
+            const views = ['menu', 'general', 'mini', 'macros'];
+            views.forEach(v => {
+                document.getElementById(`view-${v}`).classList.add('hidden');
+            });
             
             document.getElementById(`view-${viewName}`).classList.remove('hidden');
 
@@ -327,15 +368,15 @@
 
             if (tab === 'rules') {
                 btnRules.className = "flex-1 py-2 rounded bg-[#ff1e56] text-white font-black transition-all uppercase tracking-wider shadow-[0_0_15px_rgba(255,30,86,0.15)]";
-                btnLaws.className = "flex-1 py-2 rounded bg-[#16161f] text-zinc-400 font-bold uppercase tracking-wider hover:bg-[#1e1e2a]";
+                btnLaws.className = "flex-1 py-2 rounded bg-[#16161f] text-zinc-400 font-bold uppercase tracking-wider hover:bg-[#1e1e2a] transition-all";
             } else {
                 btnLaws.className = "flex-1 py-2 rounded bg-[#ff1e56] text-white font-black transition-all uppercase tracking-wider shadow-[0_0_15px_rgba(255,30,86,0.15)]";
-                btnRules.className = "flex-1 py-2 rounded bg-[#16161f] text-zinc-400 font-bold uppercase tracking-wider hover:bg-[#1e1e2a]";
+                btnRules.className = "flex-1 py-2 rounded bg-[#16161f] text-zinc-400 font-bold uppercase tracking-wider hover:bg-[#1e1e2a] transition-all";
             }
 
             renderFilterBar();
             updateFuse();
-            search();
+            performSearch();
         }
 
         function renderFilterBar() {
@@ -353,7 +394,7 @@
             currentFilter = filter;
             renderFilterBar();
             updateFuse();
-            search();
+            performSearch();
         }
 
         function updateFuse() {
@@ -362,12 +403,12 @@
             fuse = new Fuse(data, { keys: ['title', 'fullText'], threshold: 0.35, ignoreLocation: true });
         }
 
-        function search() {
+        function performSearch() {
             const query = document.getElementById('search').value.trim().toLowerCase();
             let source = db[currentMainTab] || [];
             if (currentFilter !== 'ALL') source = source.filter(item => item.category === currentFilter);
 
-            if (!query) return render(source, '');
+            if (!query) return render(source, ''); 
 
             let results = fuse.search(query).map(r => r.item);
             source.forEach(item => {
@@ -375,6 +416,7 @@
                     if (!results.some(r => r.id === item.id)) results.push(item);
                 }
             });
+            
             render(results, query);
         }
 
@@ -394,7 +436,7 @@
         function render(items, query) {
             const container = document.getElementById('results');
             if(!items || items.length === 0) {
-                container.innerHTML = `<div class="text-zinc-600 text-xs text-center py-12 font-bold tracking-wider uppercase">Ничего не найдено. Выполните парсинг.</div>`;
+                container.innerHTML = `<div class="text-zinc-600 text-xs text-center py-12 font-bold tracking-wider uppercase">Ничего не найдено</div>`;
                 return;
             }
 
@@ -416,7 +458,7 @@
                 }
 
                 return `
-                    <div class="bg-[#121218] border border-[#1f1f2e] p-4 rounded-lg hover:border-[#ff1e56]/40 transition-all flex flex-col gap-3 relative group">
+                    <div class="bg-[#121218] border border-[#1f1f2e] p-4 rounded-lg flex flex-col gap-3 relative group">
                         <div class="flex justify-between items-center border-b border-[#1b1b26] pb-3">
                             <div onclick="copyToClipboard('${clipText}')" class="no-drag font-black text-sm text-[#ff1e56] cursor-pointer hover:text-white bg-[#ff1e56]/5 hover:bg-[#ff1e56] px-3 py-1.5 rounded border border-[#ff1e56]/20 transition-all shadow-sm">
                                 ${hlTitle}
@@ -452,9 +494,7 @@
             container.innerHTML = html;
         }
 
-        // ДВИЖОК СЕПАРАТНОГО РЕНДЕРА МАКРОСОВ
         function renderMacros(macros) {
-            macrosCache = macros;
             const container = document.getElementById('macros-container');
             if (!macros || macros.length === 0) {
                 container.innerHTML = `<div class="text-zinc-600 text-xs text-center py-8 font-bold tracking-wider uppercase">Список макросов пуст. Заполните macros.json</div>`;
@@ -469,7 +509,6 @@
             `).join('');
         }
 
-        // Копирование по индексу (защита от ломающих кавычек)
         function copyMacroByIndex(index) {
             if (macrosCache[index]) {
                 copyToClipboard(macrosCache[index].code);
@@ -487,13 +526,39 @@
             }, 1200);
         }
 
-        document.getElementById('search').addEventListener('input', search);
+        document.getElementById('search').addEventListener('input', performSearch);
         document.getElementById('opacity').addEventListener('input', (e) => window.api.setOpacity(e.target.value));
         window.api.onFocus(() => {
             if (!document.getElementById('view-general').classList.contains('hidden')) {
                 document.getElementById('search').focus();
             }
         });
+
+        if (window.api && window.api.onUpdateStarted) {
+            window.api.onUpdateStarted(() => {
+                const overlay = document.getElementById('update-overlay');
+                overlay.classList.remove('hidden');
+                overlay.classList.add('flex');
+            });
+
+            window.api.onUpdateProgress((percent) => {
+                const p = Math.round(percent);
+                document.getElementById('update-progress-bar').style.width = p + '%';
+                document.getElementById('update-progress-text').innerText = p + '%';
+            });
+
+            window.api.onUpdateFinished(() => {
+                document.getElementById('update-progress-text').innerText = '100% - УСТАНОВКА';
+                document.getElementById('update-progress-bar').classList.add('bg-emerald-500');
+                document.getElementById('update-progress-bar').classList.remove('bg-[#ff1e56]');
+            });
+
+            window.api.onUpdateError(() => {
+                const overlay = document.getElementById('update-overlay');
+                overlay.classList.add('hidden');
+                overlay.classList.remove('flex');
+            });
+        }
 
         init();
     </script>
