@@ -25,7 +25,8 @@ async function syncDatabase() {
     const bundledDbPath = path.join(__dirname, 'data.json');
 
     try {
-        const response = await fetch(REMOTE_DB_URL, { cache: 'no-store' });
+        // Добавляем ?t=таймстэмп, чтобы GitHub всегда отдавал свежий файл, минуя кэш
+        const response = await fetch(`${REMOTE_DB_URL}?t=${Date.now()}`, { cache: 'no-store' });
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         
         const data = await response.json();
@@ -124,14 +125,18 @@ function createWindow() {
         height: 650,
         transparent: true,
         frame: false,
-        alwaysOnTop: true,
-        skipTaskbar: true, // Скрываем из панели задач, оставляем только в трее
+        type: 'toolbar', // Ключевой фикс: ОС перестает триггерить таскбар при фокусе
+        skipTaskbar: true,
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'),
             contextIsolation: true,
             nodeIntegration: false
         }
     });
+
+    // Агрессивный форс Z-индекса поверх всех окон и полноэкранных приложений
+    win.setAlwaysOnTop(true, 'screen-saver', 1);
+    win.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true });
 
     win.loadFile('index.html');
     win.on('blur', () => { if (win) win.hide(); });
@@ -156,7 +161,7 @@ function createTray() {
         { label: 'Выйти из приложения', click: () => { app.quit(); } }
     ]);
 
-    tray.setToolTip('LIFE5RP MEMO LAWS');
+    tray.setToolTip('GTA5RP MEMO LAWS');
     tray.setContextMenu(contextMenu);
     tray.on('click', () => toggleWindow());
 }
