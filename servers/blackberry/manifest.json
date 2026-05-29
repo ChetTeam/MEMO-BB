@@ -1,0 +1,22 @@
+{
+  "server": "blackberry",
+  "modules": {
+    "laws": [
+      "ук.json",
+      "дк.json",
+      "ак.json",
+      "пк.json"
+    ],
+    "rules": [
+      "проекта.json",
+      "fz_ft.json",
+      "гш.json",
+      "огр.json",
+      "пгс.json",
+      "облав.json",
+      "рейдов.json",
+      "мафий.json",
+      "банд.json"
+    ]
+  }
+}

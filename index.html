@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.js"></script>
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .drag { -webkit-app-region: drag; }
+        .no-drag { -webkit-app-region: no-drag; }
+
+        .bg-main { background-color: #0a0a0f; }
+        .bg-card { background-color: #12121a; }
+        .border-tactical { border-color: #1f1f2b; }
+
+        .accent-red { color: #c0262e; }
+        .accent-gold { color: #fbbf24; }
+        .bg-accent-red { background-color: #c0262e; }
+        .hover-accent-red:hover { background-color: #b91c2c; }
+
+        .custom-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scroll::-webkit-scrollbar-thumb { 
+            background: #27272a; 
+            border-radius: 3px; 
+        }
+        .custom-scroll::-webkit-scrollbar-thumb:hover { background: #c0262e; }
+
+        .article-card {
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .article-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px -5px rgb(192 38 46 / 0.2);
+            border-color: #c0262e;
+        }
+
+        .glow-red {
+            box-shadow: 0 0 20px -5px rgb(192 38 46 / 0.5);
+        }
+
+        mark { 
+            background: rgba(192, 38, 46, 0.25); 
+            color: #fbbf24; 
+            font-weight: 700; 
+            padding: 0 3px; 
+            border-radius: 2px; 
+        }
+
+        .mf-grid { 
+            display: grid; 
+            grid-template-columns: 70px 1fr 140px; 
+            gap: 1px; 
+            background: #1f1f2e; 
+            border: 1px solid #1f1f2b; 
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .mf-header { 
+            background: #161622; 
+            font-weight: 800; 
+            font-size: 10px; 
+            text-transform: uppercase; 
+            color: #a1a1aa; 
+            padding: 10px 8px; 
+            text-align: center; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .mf-cell { 
+            background: #12121a; 
+            padding: 10px 12px; 
+            font-size: 11px; 
+            color: #d4d4d8; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            text-align: center; 
+        }
+        .mf-cell-left { 
+            justify-content: flex-start; 
+            text-align: left; 
+        }
+        
+        .cat-uk { background: rgba(192, 38, 46, 0.1); color: #c0262e; }
+        .cat-ak { background: rgba(245, 158, 11, 0.1); color: #fbbf24; }
+        .cat-dk { background: rgba(16, 185, 129, 0.1); color: #10b981; }
+        .cat-pk { background: rgba(56, 189, 248, 0.1); color: #38bdf8; }
+        .cat-other { background: rgba(161, 161, 170, 0.1); color: #a1a1aa; }
+        .cat-links { background: rgba(139, 92, 246, 0.1); color: #8b5cf6; }
+    </style>
+</head>
+<body class="bg-main text-zinc-200 h-screen flex flex-col border border-[#1f1f2b] rounded-xl overflow-hidden shadow-2xl relative">
+
+    <div class="drag bg-[#111116] px-5 py-3.5 flex justify-between items-center border-b border-[#1f1f2b] z-50">
+        <div class="flex items-center gap-3">
+            <div class="w-7 h-7 bg-gradient-to-br from-[#c0262e] to-[#fbbf24] rounded flex items-center justify-center text-sm font-black text-black shadow-inner">BB</div>
+            <div class="flex items-baseline">
+                <span class="text-white font-black text-lg tracking-[-0.5px]">BLACKBERRY</span>
+                <span class="accent-gold font-bold text-xs tracking-[1.5px] ml-2">MEMO</span>
+            </div>
+        </div>
+        
+        <div class="flex items-center gap-4">
+            <button id="btn-back" onclick="switchView('menu')" 
+                    class="no-drag hidden text-zinc-400 hover:text-white transition-all text-xs font-bold bg-[#1a1a22] px-5 py-2 rounded-lg border border-[#27272f] hover:border-[#c0262e]">
+                ← В МЕНЮ
+            </button>
+            <button onclick="window.api.close()" 
+                    class="no-drag text-zinc-500 hover:text-[#c0262e] transition-colors text-2xl leading-none font-light">✕</button>
+        </div>
+    </div>
+
+    <div id="view-menu" class="flex-grow flex flex-col p-8 overflow-y-auto custom-scroll">
+        <h1 class="text-3xl font-black mb-8 text-white tracking-wide">Памятка по законам</h1>
+        
+        <div class="flex gap-8">
+            <div class="w-1/2 flex flex-col gap-4">
+                <div class="bg-card border border-[#1f1f2b] rounded-lg p-5">
+                    <div class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-4">Режимы базы данных</div>
+                    <button onclick="switchView('general')" class="no-drag w-full py-4 mb-3 rounded bg-accent-red text-white font-black uppercase tracking-wider hover:bg-[#b91c2c] transition-all shadow-[0_0_15px_rgba(192,38,46,0.25)] text-sm">ОБЩИЙ ФОРУМ</button>
+                    <button onclick="switchView('macros')" class="no-drag w-full py-4 mb-3 rounded bg-[#181824] border border-[#27272f] text-zinc-300 font-bold uppercase tracking-wider hover:bg-[#1e1e2d] transition-all text-sm">МАКРОСЫ</button>
+                    <button onclick="switchView('mini')" class="no-drag w-full py-4 rounded bg-[#181824] border border-[#27272f] text-zinc-300 font-bold uppercase tracking-wider hover:bg-[#1e1e2d] transition-all text-sm">МИНИ-ФОРУМ</button>
+                </div>
+
+                <div class="bg-card border border-[#1f1f2b] rounded-lg p-5">
+                    <div class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-3">Горячая клавиша вызова</div>
+                    <div class="flex gap-2">
+                        <input type="text" id="hotkey-input" class="no-drag w-full py-2 px-3 rounded bg-[#0b0b0f] border border-[#1f1f2b] text-center text-zinc-300 font-mono text-xs tracking-wider focus:outline-none focus:border-[#c0262e]" placeholder="Alt+E">
+                        <button onclick="saveNewHotkey()" class="no-drag px-4 rounded bg-[#181824] border border-[#27272f] text-zinc-300 font-bold text-xs uppercase tracking-wider hover:bg-[#1e1e2d] transition-all">ОК</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-1/2 bg-card border border-[#1f1f2b] rounded-lg p-6 relative overflow-hidden">
+                <div class="absolute left-7 top-7 bottom-7 w-px bg-[#2a2a35]"></div>
+                <div class="relative pl-7 mb-6">
+                    <div class="absolute left-[-4px] top-1.5 w-2 h-2 rounded-full bg-[#c0262e] ring-4 ring-[#12121a]"></div>
+                    <div class="text-xs font-bold text-white mb-1.5 tracking-wider">28.05.2026</div>
+                    <div class="text-[11px] text-zinc-400 space-y-1.5 leading-relaxed">
+                        <p>• Синхронизированы сроки Арестов УК/АК с Форумом.</p>
+                        <p>• Синхронизированы суммы Штрафов с Форумом.</p>
+                        <p>• Удалены не актуальные (потерянные силу) статьи.</p>
+                        <p>• Интеграция базы с локальной файловой структурой.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-auto pt-6 border-t border-[#1c1c2b] flex items-center justify-between">
+            <div class="text-[11px] font-black text-zinc-500 uppercase tracking-widest">Связь с нами</div>
+            <div class="flex items-center gap-3">
+                <button onclick="window.api.openGithub()" class="no-drag flex items-center justify-center w-8 h-8 rounded bg-[#181824] border border-[#27272f] text-zinc-400 hover:text-white hover:border-zinc-500 transition-all cursor-pointer shadow-sm">
+                    <svg class="w-[18px] h-[18px]" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                </button>
+                <button onclick="window.api.openDiscord()" class="no-drag flex items-center gap-2 text-[11px] font-black text-zinc-400 hover:text-[#5865F2] transition-colors uppercase tracking-widest cursor-pointer">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+                    404 : Server Not Found
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="view-general" class="hidden min-h-0 flex-grow flex flex-col">
+        <div class="px-4 py-2 flex bg-[#111116] border-b border-[#1f1f2b] gap-2 text-xs flex-shrink-0">
+            <button id="tab-laws" onclick="switchMainTab('laws')" class="flex-1 py-2 rounded bg-accent-red text-white font-black transition-all uppercase tracking-wider shadow-[0_0_15px_rgba(192,38,46,0.25)]">ЗАКОНЫ</button>
+            <button id="tab-rules" onclick="switchMainTab('rules')" class="flex-1 py-2 rounded bg-[#16161f] text-zinc-400 font-bold uppercase tracking-wider hover:bg-[#1e1e2a] transition-all">ПРАВИЛА</button>
+        </div>
+        <div class="bg-[#08080c] border-b border-[#171724] px-4 py-2 flex items-center flex-shrink-0">
+            <div id="filter-bar" class="filter-scroll flex gap-1.5 overflow-x-auto w-full text-[10px] font-black tracking-wider uppercase"></div>
+        </div>
+        <div class="p-4 bg-[#08080c]/50 flex-shrink-0">
+            <input type="text" id="search" placeholder="Поиск статьи или номера пункта..." class="no-drag w-full bg-card border border-[#232336] rounded-md px-3 py-2 text-sm focus:outline-none focus:border-[#c0262e] transition-all text-white placeholder-zinc-600" autocomplete="off" spellcheck="false">
+        </div>
+        <div id="results" class="flex-grow overflow-y-auto custom-scroll px-4 pb-4 space-y-2.5"></div>
+    </div>
+
+    <div id="view-macros" class="hidden min-h-0 flex-grow bg-[#0b0b0f] overflow-y-auto custom-scroll p-4">
+        <div class="bg-card border border-[#1f1f2b] p-4 rounded-md mb-4 text-[11px] text-zinc-300 leading-relaxed">
+            <span class="accent-red font-black tracking-wide uppercase block mb-1">📋 Инструкция по импорту:</span>
+            Импорт происходит в следующем порядке: копируем готовый код, создаем сценарий (F10 - Настройки - Макросы - «плюс»), выбираем «Импорт», вставляем код в соответствующее поле и жмём «Загрузить».
+        </div>
+        <div id="macros-container" class="space-y-2"></div>
+    </div>
+
+    <div id="view-mini" class="hidden min-h-0 flex-grow bg-[#0b0b0f] overflow-y-auto custom-scroll p-4">
+        <div id="mf-container" class="mf-grid rounded-md overflow-hidden shadow-lg"></div>
+    </div>
+
+    <div id="footer-opacity" class="hidden bg-[#111116] border-t border-[#1f1f2b] px-4 py-3 flex justify-between items-center text-[10px] font-bold text-zinc-500 uppercase tracking-wide flex-shrink-0">
+        <div class="flex items-center gap-4 w-full justify-between">
+            <span>Прозрачность интерфейса:</span>
+            <input type="range" id="opacity" min="0.2" max="1" step="0.05" value="0.95" class="no-drag w-48 h-1 bg-[#1a1a26] rounded-lg appearance-none cursor-pointer" style="accent-color: #c0262e;">
+        </div>
+    </div>
+
+    <div id="update-overlay" class="hidden absolute inset-0 bg-[#0b0b0f]/95 z-[100] flex-col items-center justify-center p-8 backdrop-blur-sm no-drag">
+        <div class="accent-red font-black text-xl mb-2 tracking-widest uppercase animate-pulse">Загрузка обновления</div>
+        <div class="text-zinc-400 text-[10px] mb-8 font-bold tracking-wider uppercase text-center">Пожалуйста, не закрывайте приложение</div>
+        
+        <div class="w-full max-w-sm bg-card rounded-full h-1.5 border border-[#232336] overflow-hidden">
+            <div id="update-progress-bar" class="bg-[#c0262e] h-1.5 rounded-full transition-all duration-200 shadow-[0_0_10px_rgba(192,38,46,0.5)]" style="width: 0%"></div>
+        </div>
+        <div id="update-progress-text" class="mt-4 text-zinc-300 font-mono text-xs font-bold tracking-widest">0%</div>
+    </div>
+
+    <div id="toast" class="fixed bottom-16 left-1/2 -translate-x-1/2 bg-[#c0262e] text-white shadow-[0_0_20px_rgba(192,38,46,0.4)] font-black px-5 py-2.5 rounded text-[11px] tracking-wider uppercase opacity-0 scale-95 pointer-events-none transition-all duration-200 z-50">
+        Скопировано в буфер!
+    </div>
+
+    <script>
+        let db = { laws: [], rules: [], macros: [], miniforum: [] };
+        let macrosCache = [];
+        let currentMainTab = 'laws';
+        let currentFilter = 'ALL';
+        let fuse;
+
+        const filtersStructure = {
+            laws: ['ALL', 'УК', 'ДК', 'АК', 'ПК'],
+            rules: ['ALL', 'проекта', 'FZ/FT', 'ГШ', 'Огр', 'ПГС', 'Облав', 'Рейдов', 'Мафий', 'Банд']
+        };
+
+        async function init() {
+            db = await window.api.getData();
+            macrosCache = db.macros && db.macros.length > 0 ? db.macros : [];
+            
+            if (window.api.getHotkey) {
+                const activeHotkey = await window.api.getHotkey();
+                document.getElementById('hotkey-input').value = activeHotkey;
+            }
+
+            renderMacros(macrosCache);
+            renderMiniForum(db.miniforum || []);
+            switchView('menu');
+            renderFilterBar();
+            updateFuse();
+            performSearch();
+        }
+
+        async function saveNewHotkey() {
+            const input = document.getElementById('hotkey-input');
+            const value = input.value.trim();
+            if (!value) return;
+
+            const success = await window.api.changeHotkey(value);
+            if (success) {
+                input.className = "no-drag w-full py-2 px-3 rounded bg-[#0b0b0f] border border-emerald-500 text-center text-emerald-400 font-mono text-xs tracking-wider focus:outline-none";
+                setTimeout(() => {
+                    input.className = "no-drag w-full py-2 px-3 rounded bg-[#0b0b0f] border border-[#1f1f2b] text-center text-zinc-300 font-mono text-xs tracking-wider focus:outline-none focus:border-[#c0262e]";
+                }, 1000);
+            } else {
+                input.className = "no-drag w-full py-2 px-3 rounded bg-[#0b0b0f] border border-rose-500 text-center text-rose-400 font-mono text-xs tracking-wider focus:outline-none";
+                alert("Ошибка: Неверный формат клавиш. Используйте синтаксис Electron (например: Alt+E, Ctrl+Shift+K, F9)");
+                const oldHotkey = await window.api.getHotkey();
+                input.value = oldHotkey;
+                input.className = "no-drag w-full py-2 px-3 rounded bg-[#0b0b0f] border border-[#1f1f2b] text-center text-zinc-300 font-mono text-xs tracking-wider focus:outline-none focus:border-[#c0262e]";
+            }
+        }
+
+        function switchView(viewName) {
+            const views = ['menu', 'general', 'mini', 'macros'];
+            views.forEach(v => {
+                const el = document.getElementById(`view-${v}`);
+                if (el) el.classList.add('hidden');
+            });
+            
+            const target = document.getElementById(`view-${viewName}`);
+            if (target) target.classList.remove('hidden');
+
+            const btnBack = document.getElementById('btn-back');
+            const footer = document.getElementById('footer-opacity');
+
+            if (viewName === 'menu') {
+                btnBack.classList.add('hidden');
+                footer.classList.add('hidden');
+            } else {
+                btnBack.classList.remove('hidden');
+                footer.classList.remove('hidden');
+                if (viewName === 'general') document.getElementById('search').focus();
+            }
+        }
+
+        function switchMainTab(tab) {
+            currentMainTab = tab;
+            currentFilter = 'ALL';
+            
+            const btnLaws = document.getElementById('tab-laws');
+            const btnRules = document.getElementById('tab-rules');
+
+            if (tab === 'rules') {
+                btnRules.className = "flex-1 py-2 rounded bg-accent-red text-white font-black transition-all uppercase tracking-wider shadow-[0_0_15px_rgba(192,38,46,0.25)]";
+                btnLaws.className = "flex-1 py-2 rounded bg-[#16161f] text-zinc-400 font-bold uppercase tracking-wider hover:bg-[#1e1e2a] transition-all";
+            } else {
+                btnLaws.className = "flex-1 py-2 rounded bg-accent-red text-white font-black transition-all uppercase tracking-wider shadow-[0_0_15px_rgba(192,38,46,0.25)]";
+                btnRules.className = "flex-1 py-2 rounded bg-[#16161f] text-zinc-400 font-bold uppercase tracking-wider hover:bg-[#1e1e2a] transition-all";
+            }
+
+            renderFilterBar();
+            updateFuse();
+            performSearch();
+        }
+
+        function renderFilterBar() {
+            const container = document.getElementById('filter-bar');
+            container.innerHTML = filtersStructure[currentMainTab].map(f => {
+                const isSelected = f === currentFilter || (currentFilter === 'ALL' && f === 'ALL');
+                const btnClass = isSelected 
+                    ? "filter-btn px-3 py-1.5 rounded bg-[#181824] accent-red border border-[#c0262e]/30 font-bold" 
+                    : "filter-btn px-3 py-1.5 rounded bg-[#111116] text-zinc-500 border border-transparent hover:bg-[#161622] transition-all";
+                return `<button onclick="setFilter('${f}')" class="${btnClass}">${f === 'ALL' ? 'ВСЕ' : f}</button>`;
+            }).join('');
+        }
+
+        function setFilter(filter) {
+            currentFilter = filter;
+            renderFilterBar();
+            updateFuse();
+            performSearch();
+        }
+
+        function updateFuse() {
+            let data = db[currentMainTab] || [];
+            if (currentFilter !== 'ALL') data = data.filter(item => item.category === currentFilter);
+            fuse = new Fuse(data, { keys: ['title', 'fullText'], threshold: 0.35, ignoreLocation: true });
+        }
+
+        function performSearch() {
+            const query = document.getElementById('search').value.trim().toLowerCase();
+            let source = db[currentMainTab] || [];
+            if (currentFilter !== 'ALL') source = source.filter(item => item.category === currentFilter);
+
+            if (!query) return render(source, ''); 
+
+            let results = fuse.search(query).map(r => r.item);
+            source.forEach(item => {
+                if ((item.fullText || '').toLowerCase().includes(query)) {
+                    if (!results.some(r => r.id === item.id)) results.push(item);
+                }
+            });
+            
+            render(results, query);
+        }
+
+        function highlight(text, query) {
+            if (!query) return text;
+            const escaped = query.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+            return text.replace(new RegExp(`(${escaped})`, 'gi'), '<mark>$1</mark>');
+        }
+
+        function formatParts(text, article, category) {
+            return text.replace(/(^|\s|[.,(>])((?:Часть|Ч\.|Ч|ч\.|ч)\s*(\d+))/gi, (match, p1, p2, p3) => {
+                const partClipText = `Ч. ${p3} ${article} ${category}`;
+                return `${p1}<span onclick="event.stopPropagation(); copyToClipboard('${partClipText}')" class="no-drag bg-[#181824] text-zinc-200 font-bold px-1.5 py-0.5 rounded border border-[#252538] text-[10px] uppercase shadow-sm mx-0.5 cursor-pointer hover:bg-[#c0262e]/10 hover:border-[#c0262e] hover:text-[#c0262e] transition-all" title="Копировать часть">${p2}</span>`;
+            });
+        }
+
+        function render(items, query) {
+            const container = document.getElementById('results');
+            if(!items || items.length === 0) {
+                container.innerHTML = `<div class="text-zinc-600 text-xs text-center py-12 font-bold tracking-wider uppercase">Ничего не найдено</div>`;
+                return;
+            }
+
+            container.innerHTML = items.map(item => {
+                const hlTitle = highlight(item.title, query);
+                let hlText = highlight(item.fullText || '', query);
+                const clipText = currentMainTab === 'laws' ? `${item.article} ${item.category}` : `Пункт ${item.article} правил ${item.category}`;
+
+                hlText = formatParts(hlText, item.article, item.category);
+                hlText = hlText.split('\n').join('<div class="h-1.5 w-full"></div>');
+
+                let punishTag = '';
+                let parts = [];
+                if (item.fine) parts.push(`Штраф ${item.fine}`);
+                if (item.jail) parts.push(`Арест ${item.jail}`);
+                
+                if (parts.length > 0) {
+                    punishTag = `<span class="bg-emerald-500/5 text-emerald-400 border border-emerald-500/10 px-2 py-0.5 rounded shadow-sm tracking-wider font-mono">${parts.join(' / ')}</span>`;
+                }
+
+                return `
+                    <div class="article-card bg-card border border-[#1f1f2b] p-4 rounded-lg flex flex-col gap-3 relative group">
+                        <div class="flex justify-between items-center border-b border-[#1b1b26] pb-3">
+                            <div onclick="copyToClipboard('${clipText}')" class="no-drag font-black text-sm accent-red cursor-pointer hover:text-white bg-[#c0262e]/5 hover:bg-[#c0262e] px-3 py-1.5 rounded border border-[#c0262e]/20 transition-all shadow-sm">
+                                ${hlTitle}
+                            </div>
+                            <div class="flex gap-1.5 text-[10px] font-black uppercase">${punishTag}</div>
+                        </div>
+                        <div class="text-[12px] text-zinc-300 font-medium leading-relaxed select-text selection:bg-[#c0262e]/30">${hlText}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderMacros(macros) {
+            const container = document.getElementById('macros-container');
+            if (!macros || macros.length === 0) {
+                container.innerHTML = `<div class="text-zinc-600 text-xs text-center py-8 font-bold tracking-wider uppercase">Список макросов пуст. Загрузите файл core/macros.json</div>`;
+                return;
+            }
+
+            container.innerHTML = macros.map((m, index) => `
+                <div onclick="copyMacroByIndex(${index})" class="no-drag bg-card border border-[#232336] p-4 rounded-lg cursor-pointer hover:border-[#c0262e]/40 transition-all flex justify-between items-center group">
+                    <span class="text-zinc-200 font-bold text-xs uppercase tracking-wider group-hover:accent-red transition-colors">${m.name}</span>
+                    <span class="text-zinc-500 text-[10px] font-black tracking-widest uppercase group-hover:accent-red/70 transition-colors">( Нажми для копирования )</span>
+                </div>
+            `).join('');
+        }
+
+        function copyMacroByIndex(index) {
+            if (macrosCache[index]) {
+                copyToClipboard(macrosCache[index].code);
+            }
+        }
+
+        function renderMiniForum(data) {
+            const container = document.getElementById('mf-container');
+            if (!data || data.length === 0) {
+                container.innerHTML = `<div class="col-span-3 text-zinc-600 text-xs text-center py-8 font-bold tracking-wider uppercase">Данные мини-форума пусты. Загрузите файл core/miniforum.json</div>`;
+                return;
+            }
+
+            let html = '';
+            data.forEach(block => {
+                html += `<div class="mf-cell cat-${block.cat} col-span-3 font-bold uppercase tracking-wider text-[11px] py-3">${block.title}</div>`;
+                
+                if (block.type === 'text') {
+                    html += `<div class="col-span-3 bg-[#12121a] p-5 text-[11px] text-zinc-300 leading-relaxed">${block.content}</div>`;
+                } else {
+                    html += `<div class="mf-header">№</div><div class="mf-header">Статья</div><div class="mf-header">Наказание</div>`;
+                    if (block.items) {
+                        block.items.forEach(item => {
+                            html += `
+                                <div class="mf-cell font-mono text-[11px] font-bold text-white cursor-pointer hover:bg-[#1f1f2e] transition-colors" onclick="copyToClipboard('${item.id} ${block.cat.toUpperCase()}')">${item.id}</div>
+                                <div class="mf-cell mf-cell-left">${item.text}</div>
+                                <div class="mf-cell font-bold text-[10px] text-zinc-400">${item.time}</div>
+                            `;
+                        });
+                    }
+                }
+            });
+            container.innerHTML = html;
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text);
+            const toast = document.getElementById('toast');
+            toast.classList.remove('opacity-0', 'scale-95');
+            toast.classList.add('opacity-100', 'scale-100');
+            setTimeout(() => {
+                toast.classList.remove('opacity-100', 'scale-100');
+                toast.classList.add('opacity-0', 'scale-95');
+            }, 1200);
+        }
+
+        document.getElementById('search').addEventListener('input', performSearch);
+        document.getElementById('opacity').addEventListener('input', (e) => window.api.setOpacity(e.target.value));
+        window.api.onFocus(() => {
+            if (!document.getElementById('view-general').classList.contains('hidden')) {
+                document.getElementById('search').focus();
+            }
+        });
+
+        if (window.api && window.api.onUpdateStarted) {
+            window.api.onUpdateStarted(() => {
+                const overlay = document.getElementById('update-overlay');
+                overlay.classList.remove('hidden');
+                overlay.classList.add('flex');
+            });
+
+            window.api.onUpdateProgress((percent) => {
+                const p = Math.round(percent);
+                document.getElementById('update-progress-bar').style.width = p + '%';
+                document.getElementById('update-progress-text').innerText = p + '%';
+            });
+
+            window.api.onUpdateFinished(() => {
+                document.getElementById('update-progress-text').innerText = '100% - УСТАНОВКА';
+                document.getElementById('update-progress-bar').classList.add('bg-emerald-500');
+                document.getElementById('update-progress-bar').classList.remove('bg-[#c0262e]');
+            });
+
+            window.api.onUpdateError(() => {
+                const overlay = document.getElementById('update-overlay');
+                overlay.classList.add('hidden');
+                overlay.classList.remove('flex');
+            });
+        }
+
+        init();
+    </script>
+</body>
+</html>

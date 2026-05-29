@@ -1,0 +1,99 @@
+[
+  {
+    "cat": "links",
+    "title": "Реестры и Полезные Ссылки",
+    "type": "text",
+    "content": "<div class=\"grid grid-cols-2 gap-3\"><div onclick=\"window.api.openExternal('https://docs.google.com/spreadsheets/d/1TEEJFp5h3AmMkzZ232eLDHov0FfjUs4geUVTO7xGQyw/edit?usp=sharing')\" class=\"no-drag bg-[#12121a] border border-[#232336] p-3 rounded cursor-pointer hover:border-[#8b5cf6] transition-all group flex flex-col items-center justify-center text-center shadow-sm\"><span class=\"text-zinc-200 font-bold text-[11px] uppercase tracking-wider group-hover:text-[#8b5cf6] transition-colors\">Реестр Коллекционеров</span><span class=\"text-zinc-500 text-[9px] font-black tracking-widest mt-1 group-hover:text-[#8b5cf6]/70 transition-colors\">( Кликабельно )</span></div><div onclick=\"window.api.openExternal('https://docs.google.com/spreadsheets/d/1AN15T9HJOx1W4NIuu8U4fSfkZtJQRzBkFqMcSI3W0Vc/edit?gid=0#gid=0')\" class=\"no-drag bg-[#12121a] border border-[#232336] p-3 rounded cursor-pointer hover:border-[#8b5cf6] transition-all group flex flex-col items-center justify-center text-center shadow-sm\"><span class=\"text-zinc-200 font-bold text-[11px] uppercase tracking-wider group-hover:text-[#8b5cf6] transition-colors\">Реестр Адвокатов</span><span class=\"text-zinc-500 text-[9px] font-black tracking-widest mt-1 group-hover:text-[#8b5cf6]/70 transition-colors\">( Кликабельно )</span></div><div onclick=\"window.api.openExternal('https://docs.google.com/spreadsheets/d/1k2k7VlEtjcKQgGdCP44unoHtYxp7YKFu3si0B0pH5fc/edit?gid=270058052#gid=270058052')\" class=\"no-drag bg-[#12121a] border border-[#232336] p-3 rounded cursor-pointer hover:border-[#8b5cf6] transition-all group flex flex-col items-center justify-center text-center shadow-sm\"><span class=\"text-zinc-200 font-bold text-[11px] uppercase tracking-wider group-hover:text-[#8b5cf6] transition-colors\">Реестр Организаций</span><span class=\"text-zinc-500 text-[9px] font-black tracking-widest mt-1 group-hover:text-[#8b5cf6]/70 transition-colors\">( Кликабельно )</span></div><div onclick=\"window.api.openExternal('https://docs.google.com/spreadsheets/d/1Q3O7JrZfyua-mbkCtdLNxBVxjO6HBNfrY-4zNfWi7Jo/edit?gid=0#gid=0')\" class=\"no-drag bg-[#12121a] border border-[#232336] p-3 rounded cursor-pointer hover:border-[#8b5cf6] transition-all group flex flex-col items-center justify-center text-center shadow-sm\"><span class=\"text-zinc-200 font-bold text-[11px] uppercase tracking-wider group-hover:text-[#8b5cf6] transition-colors\">Реестр Пилотов</span><span class=\"text-zinc-500 text-[9px] font-black tracking-widest mt-1 group-hover:text-[#8b5cf6]/70 transition-colors\">( Кликабельно )</span></div><div onclick=\"window.api.openExternal('https://docs.google.com/spreadsheets/d/1aP-DNiTUKfITCL4gerj_tBTjFV9_QleR3vwysTXHJpw/edit?gid=0#gid=0')\" class=\"no-drag bg-[#12121a] border border-[#232336] p-3 rounded cursor-pointer hover:border-[#8b5cf6] transition-all group flex flex-col items-center justify-center text-center shadow-sm\"><span class=\"text-zinc-200 font-bold text-[11px] uppercase tracking-wider group-hover:text-[#8b5cf6] transition-colors\">Реестр Аренды</span><span class=\"text-zinc-500 text-[9px] font-black tracking-widest mt-1 group-hover:text-[#8b5cf6]/70 transition-colors\">( Кликабельно )</span></div><div onclick=\"window.api.openExternal('https://forum.gta5rp.com/forums/zakonodatelnaja-baza.262/')\" class=\"no-drag bg-[#12121a] border border-[#232336] p-3 rounded cursor-pointer hover:border-[#8b5cf6] transition-all group flex flex-col items-center justify-center text-center shadow-sm\"><span class=\"text-zinc-200 font-bold text-[11px] uppercase tracking-wider group-hover:text-[#8b5cf6] transition-colors\">Законодательная База</span><span class=\"text-zinc-500 text-[9px] font-black tracking-widest mt-1 group-hover:text-[#8b5cf6]/70 transition-colors\">( Кликабельно )</span></div></div>"
+  },
+  {
+    "cat": "uk",
+    "title": "Уголовный кодекс",
+    "type": "table",
+    "items": [
+      { "id": "21", "text": "Соучастники преступления несут ответственность в равном объёме.", "time": "-" },
+      { "id": "37", "text": "Умышленное нанесение особо тяжких телесных повреждений ((нок))", "time": "30-60 мин" },
+      { "id": "37.3", "text": "Причинение смерти по неосторожности (( IC смерть персонажа ))", "time": "30-60 мин" },
+      { "id": "38", "text": "Угроза расправой (прямая/косвенная) должностному лицу или членам его семьи", "time": "30-60 мин" },
+      { "id": "39 ч.1", "text": "Похищение человека", "time": "30-60 мин" },
+      { "id": "44", "text": "Грабеж, то есть открытое хищение чужого имущества", "time": "30-60 мин" },
+      { "id": "45", "text": "Разбой, то есть нападение в целях хищения чужого имущества", "time": "30-60 мин" },
+      { "id": "47", "text": "Умышленное или совершенное по неосторожности уничтожение либо повреждение чужого или государственного имущества", "time": "30-60 мин" },
+      { "id": "56", "text": "Терроризм", "time": "30-60 мин" },
+      { "id": "59", "text": "Незаконное проникновение/нахождение на особо охраняемом объекте", "time": "30-60 мин" },
+      { "id": "60", "text": "Незакон. использ/сбыт/хранение любых видов оруж. и спец.средств гос.обр., а также нарушение установленных правил обращения с оружием", "time": "30-60 мин" },
+      { "id": "64", "text": "Оборот легких (>5 гр) или тяжелых (>2 гр) наркотиков", "time": "40-60 мин" },
+      { "id": "64.1", "text": "Оборот легких (>10 гр) или тяжелых (>5 гр) наркотиков", "time": "30-60 мин" },
+      { "id": "64.2", "text": "Оборот легких (>25 гр) или тяжелых (>10 гр) наркотиков", "time": "30-60 мин" },
+      { "id": "70 ч.1", "text": "Побег из места лишения свободы, из-под ареста или из-под стражи", "time": "30-60 мин" },
+      { "id": "73", "text": "Получение взятки / Дача взятки", "time": "30-60 мин" },
+      { "id": "78", "text": "Незаконное задержание", "time": "60 мин" },
+      { "id": "89", "text": "Посягательство на жизнь сотрудника гос.структуры", "time": "30-60 мин" },
+      { "id": "90", "text": "Насилие, неопасное для жизни, либо угроза гос.сотруднику", "time": "60 мин" },
+      { "id": "95", "text": "Нарушение 3-х или более АК", "time": "60 мин" }
+    ]
+  },
+  {
+    "cat": "ak",
+    "title": "Административный кодекс",
+    "type": "table",
+    "items": [
+      { "id": "15 ч.1", "text": "Мелкое хулиганство", "time": "10-20 мин или 5.000$-10.000$" },
+      { "id": "18 п. А", "text": "Нахождение в общ. местах в неприемлемом виде (Без одежды)", "time": "10-30 мин или 5.000$-10.000$" },
+      { "id": "18 п. Б", "text": "Нахождение в неприемлемом виде где угодно (В маске)", "time": "10-30 мин или 5.000$-10.000$" },
+      { "id": "20", "text": "Нарушение правил обращения с оружием, спецсредствами, инструментами и спортивным инвентарем", "time": "10-30 или 10.000$-30.000$" },
+      { "id": "22 ч.1", "text": "Незаконное проникновение/нахождение на охраняемом объекте", "time": "10-30 мин или 10.000$-30.000$" },
+      { "id": "24", "text": "Контрабанда", "time": "10-30 мин" },
+      { "id": "24.2", "text": "Оборот поддельной товарно-транспортной докум. (накладная)", "time": "10-30 мин или 15.000$-30.000$ + изъять груз" },
+      { "id": "26", "text": "Угроза расправой (прямая или косвенная) гражданскому лицу", "time": "20-30 мин" },
+      { "id": "36", "text": "Кража, то есть тайное хищение чужого имущества", "time": "10-30 мин или 10.000$-30.000$" },
+      { "id": "37", "text": "Угон авто", "time": "20-30 мин" },
+      { "id": "39", "text": "Незаконное проникновение в жилище", "time": "10-30 мин" },
+      { "id": "41", "text": "Нарушения в сфере добычи биологических ресурсов", "time": "30 мин или 15.000$-30.000$" },
+      { "id": "43", "text": "Оборот легких (3-5 гр) (Вкл.) или тяжелых (<2 гр) (Вкл.) наркотиков", "time": "10-30 мин" },
+      { "id": "44", "text": "Умышленное нанесение телесных повреждений (10 - 99% HP)", "time": "10-30 мин" },
+      { "id": "44.1", "text": "Сутенерство/проституция в любой форме", "time": "10-30 мин" },
+      { "id": "46 ч.1", "text": "Вмешат./воспреп. в процесс задержания/ареста гражданином", "time": "20 мин или 10.000$-15.000$" },
+      { "id": "46 ч.2", "text": "Вмешат./воспреп. в процесс задержания/ареста госником", "time": "30 мин или 15.000$-30.000$" },
+      { "id": "48 ч.1", "text": "Оскорбление представителя власти при исполнении", "time": "10-30 мин или 15.000$-30.000$" },
+      { "id": "50 ч.1", "text": "Провокация гос. служащего при исполнении (помеха/отвлечение)", "time": "10-30 мин или 15.000$-30.000$" },
+      { "id": "51", "text": "Неповиновение законному требованию", "time": "10-30 мин или 10.000$" },
+      { "id": "52", "text": "Отказ от оплаты штрафа", "time": "20-30 мин" },
+      { "id": "53 ч.1", "text": "Клевета", "time": "10-20 мин или 15.000$-30.000$" },
+      { "id": "57 ч.1", "text": "Оскорбление, унижение чести и достоинства гражданина", "time": "10-20 мин или 5.000$-15.000$" }
+    ]
+  },
+  {
+    "cat": "dk",
+    "title": "Дорожный кодекс",
+    "type": "table",
+    "items": [
+      { "id": "4", "text": "Водитель обязан выйти,предъявить ВУ, тех.паспорт, личн. паспорт + госник может проверить накладную коммерч. т.с. самолично", "time": "51 АК" },
+      { "id": "5", "text": "Водитель обязан остановиться по требованию", "time": "51 АК" },
+      { "id": "7", "text": "При аварии, водитель обязан остановиться и не трогаться с места", "time": "До 7.000$" },
+      { "id": "п.А-Д 12", "text": "Опасное вождение", "time": "До 5.000$" },
+      { "id": "16", "text": "Мотоцикл - запрещено передвигаться без шлема", "time": "До 2.000$" },
+      { "id": "22", "text": "Беспорядоч. движение/нахождение на проезжей части пешеходом", "time": "До 4.000$" },
+      { "id": "34", "text": "Запрещается двигаться по полосе встречного движения", "time": "До 3.000$" },
+      { "id": "36", "text": "Запрещается двигаться по обочинам/тротуарам/велодорожкам", "time": "До 5.000$" },
+      { "id": "40", "text": "Нарушение правил остановки", "time": "До 4.000$" },
+      { "id": "41", "text": "Парковка не на правой стороне дороги и не вплотную к бордюру", "time": "До 2.000$" },
+      { "id": "44", "text": "На автомат. запрещ. движение грузовик. вне крайней правой полос.", "time": "До 3.000$" },
+      { "id": "48, 49", "text": "48 - Пересечение желтой двойной сплошной, 49 - одной", "time": "До 3.000$" },
+      { "id": "58", "text": "Пересечение разделительной полосы", "time": "До 2.000$" },
+      { "id": "66", "text": "Запрещается использование ТС без регистрации. Запрещается использование ТС без номеров (пробег >5 КМ). Запрещается использ. ТС с отличающ. номерами на ТС и ПТС", "time": "-Права + до 10.000$" },
+      { "id": "67", "text": "Незаконное использован. опознавательных элементов служеб. т. с", "time": "-Права + 30 мин" }
+    ]
+  },
+  {
+    "cat": "other",
+    "title": "Иное (Спецсредства, Тайминги, Коды)",
+    "type": "text",
+    "content": "<div class=\"flex gap-8\"><div class=\"flex-1 space-y-3\"><div><span class=\"text-zinc-200 font-black tracking-wide uppercase\">Спецсредства</span><br><span class=\"text-zinc-400 leading-snug\">Тайзер, наручники<br>Бронежилет, дубинка<br>Светошумовая граната<br>Дымовые гранатометы</span></div><div><span class=\"text-zinc-200 font-black tracking-wide uppercase\">Тайминги</span><br><span class=\"text-zinc-400 leading-snug\">Ответ адвоката на вызов — 3 мин<br>Ожидание адвоката — 10 мин<br>Телефонный разговор — 3 мин<br>Конфиденциальная беседа — 10 мин<br>Ожидание начальства/прокурора — 15 мин<br>Допрос и задержание — 60 мин</span></div><div><span class=\"text-zinc-200 font-black tracking-wide uppercase\">Звезды розыска</span><br><span class=\"text-zinc-400 leading-snug\">★ — 30 мин | ★★ — 1 час | ★★★ — 2 часа<br>★★★★ — 3 часа | ★★★★★ — 5 часов</span></div></div><div class=\"flex-1 space-y-3\"><div><span class=\"text-zinc-200 font-black tracking-wide uppercase\">Тен-коды</span><br><span class=\"text-zinc-400 leading-snug\">10-0 — Отмена | 10-3 — Радиомолчание<br>10-4 — Принял | 10-6 — Отказано<br>10-5 — Повторите | 10-7 — Ожидайте<br>10-20 — Местоположение | 10-77 — Время ожидания<br>10-30 — Поставка</span></div><div><span class=\"text-zinc-200 font-black tracking-wide uppercase\">Особо охраняемые объекты</span><br><span class=\"text-zinc-400 leading-snug\">- ВПП, ангары аэропорта и прилегающие территории<br>- Федеральная тюрьма и Форт Занкудо<br>- Авианосец USS</span></div><div><span class=\"text-zinc-200 font-black tracking-wide uppercase\">Охраняемые объекты</span><br><span class=\"text-zinc-400 leading-snug\">- Участки FIB, LSSD, LSPD (кроме холла)<br>- Участки GOV (кроме холла)<br>- Служебные помещения и парковки EMS</span></div></div></div><div class=\"mt-4 pt-4 border-t border-[#1f1f2e]\"><span class=\"text-[#ff1e56] font-black tracking-wide uppercase\">Правило Миранды (2 раза)</span><br><span class=\"text-zinc-300 italic\">«Вы имеете право хранить молчание. Всё, что вы скажете, может и будет использовано против вас в суде. Вы имеете право на один телефонный звонок и на адвоката. Если у вас нет средств на адвоката, он будет запрошен. Вы понимаете свои права?»</span><br><span class=\"text-zinc-500 text-[10px] uppercase font-bold mt-1 inline-block\">Примечание: После 2-х повторов Миранда считается зачитанной, более не зачитывается.</span></div>"
+  },
+  {
+    "cat": "pk",
+    "title": "Порядок Задержания и Основания",
+    "type": "text",
+    "content": "<div class=\"space-y-4\"><div><span class=\"text-[#38bdf8] font-black tracking-wide uppercase block mb-1\">Основания для задержания (Статья 16 ПК)</span><div class=\"text-zinc-400 space-y-1\"><p><span class=\"text-white font-bold\">ч. 1</span> Лицо может быть задержано по подозрению в совершении правонарушения.</p><p><span class=\"text-white font-bold\">ч. 2</span> Лицо может быть задержано при наличии хотя бы одного из оснований: <br>а) Застигнуто в момент правонарушения; б) Явные следы преступления на лице/одежде/жилище; в) 3+ свидетелей; г) Фото/видеофиксация; д) Нормативный документ/указ; е) Ориентировка; ж) Законное требование (Губернатор, ВЦГ, ГП, ПВС); з) Нахождение в боло-розыске.</p><p><span class=\"text-white font-bold\">ч. 3</span> Не может быть задержано только на основании ношения оружия (за спиной/на ремне). В кобуре — запросить документы.</p><p><span class=\"text-white font-bold\">ч. 4</span> Если лицо находится в боло-розыске.</p><p><span class=\"text-white font-bold\">ч. 5</span> Не может быть задержано только на основании ношения гос. брони (запросить документы).</p><p class=\"text-zinc-500 text-[10px] uppercase font-bold mt-1\">Примечание: В случае с гос. сотрудниками запрашивать паспорта дополнительно ЗАПРЕЩЕНО.</p></div></div><div class=\"h-px w-full bg-[#1f1f2e]\"></div><div><span class=\"text-[#38bdf8] font-black tracking-wide uppercase block mb-1\">Порядок задержания (Статья 17 ПК)</span><div class=\"text-zinc-400 space-y-2\"><p><span class=\"text-white font-bold\">ч. 1</span> При ведении следствия: <br>а) Наручники; б) УДО/нашивка; в) Первичный обыск (при необходимости); г) Основания и Миранда; д) Доставить в КПЗ; е) Проверить документы, неприкосновенность, розыск; ж) Реализовать права (вызвать руководство/ОГП для гос); з) Доставить в участок/штаб; и) Допрос.</p><p><span class=\"text-white font-bold\">ч. 2</span> По приказу (Губернатор, ВЦГ, ГП, ордера): <br>а) Наручники; б) УДО/нашивка; в) Первичный обыск; г) Короткая Миранда; д) Доставить в КПЗ; е) Проверить документы, неприкосновенность, розыск; ж) Телефонный звонок; з) Разъяснить основания; и) Вызвать руководство (если гос).</p></div></div><div class=\"mt-2 p-3 bg-[#161622] rounded border border-[#252538]\"><span class=\"text-white font-bold text-[10px] uppercase tracking-wider\">Краткая Миранда (ч. 2 ст. 17 ПК):</span><br><span class=\"text-zinc-300 italic text-[11px]\">«Вы имеете право хранить молчание. Всё, что вы скажете, может и будет использовано против вас в суде. Также вы имеете право на один телефонный звонок. Вы понимаете свои права?»</span></div></div>"
+  }
+]
